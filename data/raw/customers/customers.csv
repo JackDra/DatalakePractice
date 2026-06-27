@@ -1,0 +1,11 @@
+customer_id,first_name,last_name,email,country,state,created_at,loyalty_tier
+CUST-0001,Ava,Nguyen,ava.nguyen@example.com,AU,NSW,2025-11-03T09:12:00Z,gold
+CUST-0002,Oliver,Smith,oliver.smith@example.com,AU,VIC,2025-12-14T04:22:00Z,silver
+CUST-0003,Mia,Johnson,mia.johnson@example.com,AU,QLD,2026-01-08T13:45:00Z,bronze
+CUST-0004,Noah,Williams,noah.williams@example.com,NZ,AUK,2026-01-20T22:15:00Z,silver
+CUST-0005,Charlotte,Brown,charlotte.brown@example.com,AU,WA,2026-02-11T02:35:00Z,gold
+CUST-0006,William,Jones,william.jones@example.com,AU,SA,2026-03-02T17:28:00Z,bronze
+CUST-0007,Amelia,Garcia,amelia.garcia@example.com,AU,TAS,2026-03-22T07:44:00Z,silver
+CUST-0008,Leo,Martin,leo.martin@example.com,AU,ACT,2026-04-05T10:00:00Z,bronze
+CUST-0009,Isla,Wilson,isla.wilson@example.com,AU,NSW,2026-04-19T16:51:00Z,gold
+CUST-0010,Henry,Lee,henry.lee@example.com,AU,VIC,2026-05-01T01:05:00Z,silver

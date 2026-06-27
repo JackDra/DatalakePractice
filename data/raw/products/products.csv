@@ -1,0 +1,11 @@
+product_id,sku,product_name,category,unit_price,currency,active
+PROD-1001,KB-MECH-01,Mechanical Keyboard,Electronics,139.00,AUD,true
+PROD-1002,MS-WL-02,Wireless Mouse,Electronics,49.00,AUD,true
+PROD-1003,HD-USBC-03,USB-C Hub,Electronics,89.00,AUD,true
+PROD-1004,NB-A5-04,A5 Notebook,Stationery,7.50,AUD,true
+PROD-1005,PN-GEL-05,Gel Pen Pack,Stationery,12.00,AUD,true
+PROD-1006,MUG-CER-06,Ceramic Mug,Home,18.00,AUD,true
+PROD-1007,BTL-STL-07,Steel Water Bottle,Home,32.00,AUD,true
+PROD-1008,BAG-LAP-08,Laptop Backpack,Accessories,79.00,AUD,true
+PROD-1009,CAM-WEB-09,Webcam,Electronics,119.00,AUD,false
+PROD-1010,LMP-DESK-10,Desk Lamp,Home,45.00,AUD,true
