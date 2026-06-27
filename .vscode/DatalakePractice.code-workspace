@@ -5,6 +5,8 @@
     }
   ],
   "settings": {
+    "python.analysis.autoImportCompletions": true,
+    "python.languageServer": "Pylance",
     "workbench.colorCustomizations": {
       "titleBar.activeBackground": "#0B1F4D",
       "titleBar.activeForeground": "#FFFFFF",
