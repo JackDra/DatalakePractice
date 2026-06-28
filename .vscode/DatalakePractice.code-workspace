@@ -5,8 +5,26 @@
     }
   ],
   "settings": {
+    "editor.lineNumbers": "relative",
     "python.analysis.autoImportCompletions": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/pipelines/.venv/Scripts/python.exe",
     "python.languageServer": "Pylance",
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.interpreter": [
+      "${workspaceFolder}/pipelines/.venv/Scripts/python.exe"
+    ],
+    "ruff.nativeServer": "on",
+    "ruff.path": [
+      "${workspaceFolder}/pipelines/.venv/Scripts/ruff.exe"
+    ],
+    "[python]": {
+      "editor.defaultFormatter": "charliermarsh.ruff",
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.ruff": "explicit",
+        "source.organizeImports.ruff": "explicit"
+      }
+    },
     "workbench.colorCustomizations": {
       "titleBar.activeBackground": "#0B1F4D",
       "titleBar.activeForeground": "#FFFFFF",
