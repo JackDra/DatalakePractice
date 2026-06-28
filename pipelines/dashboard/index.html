@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datalake Practice Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gold layer</p>
+          <h1>Daily Sales Summary</h1>
+        </div>
+        <button id="refreshButton" type="button">Refresh</button>
+      </header>
+
+      <section class="metrics" aria-label="Sales metrics">
+        <article>
+          <span>Total sales</span>
+          <strong id="totalSales">$0.00</strong>
+        </article>
+        <article>
+          <span>Orders</span>
+          <strong id="totalOrders">0</strong>
+        </article>
+        <article>
+          <span>Units sold</span>
+          <strong id="totalUnits">0</strong>
+        </article>
+      </section>
+
+      <section class="tableSection">
+        <div class="sectionHeader">
+          <h2>Latest gold output</h2>
+          <p id="statusText">Waiting for data</p>
+        </div>
+        <div class="tableWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Channel</th>
+                <th>Category</th>
+                <th>Orders</th>
+                <th>Units</th>
+                <th>Gross sales</th>
+                <th>Avg line</th>
+              </tr>
+            </thead>
+            <tbody id="summaryBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -108,3 +108,7 @@ class SparkService:
         daily_sales_summary.write.mode("overwrite").parquet(
             f"{self.gold_base}/daily_sales_summary"
         )
+
+        daily_sales_summary.coalesce(1).write.mode("overwrite").json(
+            f"{self.gold_base}/dashboard/daily_sales_summary_json"
+        )

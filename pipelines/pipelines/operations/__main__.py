@@ -68,5 +68,28 @@ def build_wheel(clean: bool) -> None:
     click.echo(f"Built wheel: {wheels[-1]}")
 
 
+@main.command("ingest-fake-orders", help="Upload a fake raw orders batch to ADLS.")
+@click.option(
+    "--rows",
+    default=5,
+    show_default=True,
+    type=click.IntRange(min=1),
+    help="Number of fake order rows to upload.",
+)
+def ingest_fake_orders_command(rows: int) -> None:
+    from pipelines.operations.fake_ingestion import ingest_fake_orders
+
+    ingest_fake_orders(row_count=rows)
+
+
+@main.command("serve-dashboard", help="Serve the local gold dashboard frontend.")
+@click.option("--host", default="127.0.0.1", show_default=True)
+@click.option("--port", default=8765, show_default=True, type=int)
+def serve_dashboard_command(host: str, port: int) -> None:
+    from pipelines.operations.serve_dashboard import serve_dashboard
+
+    serve_dashboard(host=host, port=port)
+
+
 if __name__ == "__main__":
     main()
