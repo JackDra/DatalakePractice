@@ -20,6 +20,7 @@ dev = [
 [project.scripts]
 bronze-to-silver-orders = "pipelines.transforms.bronze_to_silver_orders:create_bronze_to_silver"
 operations = "pipelines.operations.__main__:main"
+silver-to-gold-sales = "pipelines.transforms.silver_to_gold_sales:create_silver_to_gold"
 
 [build-system]
 requires = ["hatchling"]

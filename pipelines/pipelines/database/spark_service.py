@@ -5,6 +5,7 @@ from pyspark.sql import functions as F
 
 DEFAULT_STORAGE_ACCOUNT_NAME = "jddatalakepractice01"
 DEFAULT_APP_NAME = "bronze-to-silver-orders"
+GOLD_APP_NAME = "silver-to-gold-sales"
 
 
 @dataclass
@@ -30,6 +31,10 @@ class SparkService:
     @property
     def silver_base(self) -> str:
         return f"abfss://silver@{self.storage_account}.dfs.core.windows.net"
+
+    @property
+    def gold_base(self) -> str:
+        return f"abfss://gold@{self.storage_account}.dfs.core.windows.net"
 
     def custom_bronze_to_silver(self) -> None:
         orders = self.session.read.option("header", True).csv(
@@ -80,4 +85,26 @@ class SparkService:
 
         orders_enriched.write.mode("overwrite").parquet(
             f"{self.silver_base}/orders_enriched"
+        )
+
+    def custom_silver_to_gold(self) -> None:
+        orders_enriched = self.session.read.parquet(
+            f"{self.silver_base}/orders_enriched"
+        )
+
+        daily_sales_summary = (
+            orders_enriched.withColumn("order_date", F.to_date("order_timestamp"))
+            .groupBy("order_date", "channel", "category", "order_currency")
+            .agg(
+                F.countDistinct("order_id").alias("order_count"),
+                F.sum("quantity").alias("units_sold"),
+                F.sum("line_total").alias("gross_sales"),
+                F.avg("line_total").alias("avg_line_total"),
+            )
+            .withColumn("processed_at", F.current_timestamp())
+            .orderBy("order_date", "channel", "category")
+        )
+
+        daily_sales_summary.write.mode("overwrite").parquet(
+            f"{self.gold_base}/daily_sales_summary"
         )
