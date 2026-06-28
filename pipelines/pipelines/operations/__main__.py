@@ -1,4 +1,7 @@
 import logging
+import shutil
+import subprocess
+from pathlib import Path
 
 import click
 
@@ -41,6 +44,28 @@ def create_bronze(run_pipeline: bool) -> None:
     from pipelines.operations.build_bronze import build_bronze
 
     build_bronze(run_pipeline=run_pipeline)
+
+
+@main.command("build-wheel", help="Build the package wheel for Databricks jobs.")
+@click.option(
+    "--clean/--no-clean",
+    default=True,
+    help="Delete the existing dist directory before building.",
+)
+def build_wheel(clean: bool) -> None:
+    project_root = Path(__file__).resolve().parents[2]
+    dist_dir = project_root / "dist"
+
+    if clean and dist_dir.exists():
+        shutil.rmtree(dist_dir)
+
+    subprocess.run(["uv", "build", "--wheel"], cwd=project_root, check=True)
+
+    wheels = sorted(dist_dir.glob("*.whl"))
+    if not wheels:
+        raise click.ClickException(f"No wheel was created in {dist_dir}")
+
+    click.echo(f"Built wheel: {wheels[-1]}")
 
 
 if __name__ == "__main__":

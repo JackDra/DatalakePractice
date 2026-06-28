@@ -3,17 +3,22 @@ name = "pipelines"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "azure-identity>=1.25.3",
     "azure-mgmt-datafactory>=9.3.0",
     "azure-storage-file-datalake>=12.25.0",
     "click>=8.3.1",
+]
+
+[dependency-groups]
+dev = [
     "pyspark>=4.1.2",
     "ruff>=0.15.20",
 ]
 
 [project.scripts]
+bronze-to-silver-orders = "pipelines.transforms.bronze_to_silver_orders:create_bronze_to_silver"
 operations = "pipelines.operations.__main__:main"
 
 [build-system]
