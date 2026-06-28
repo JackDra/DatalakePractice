@@ -9,6 +9,7 @@ dependencies = [
     "azure-mgmt-datafactory>=9.3.0",
     "azure-storage-file-datalake>=12.25.0",
     "click>=8.3.1",
+    "pyspark>=4.1.2",
     "ruff>=0.15.20",
 ]
 
