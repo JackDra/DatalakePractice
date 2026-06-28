@@ -5,21 +5,29 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+from azure.core.exceptions import ResourceNotFoundError
+
 from pipelines.operations.upload_sample import get_dl_service
 
 logger = logging.getLogger(__name__)
 
-DASHBOARD_DIR = Path(__file__).resolve().parents[3] / "dashboard"
+DASHBOARD_DIR = Path(__file__).resolve().parents[2] / "dashboard"
 DASHBOARD_JSON_PATH = "dashboard/daily_sales_summary_json"
 
 
 def load_daily_sales_summary() -> list[dict]:
     dl_service = get_dl_service()
     gold_client = dl_service.get_file_system_client("gold")
-    paths = gold_client.get_paths(path=DASHBOARD_JSON_PATH)
-    json_paths = sorted(
-        path.name for path in paths if not path.is_directory and "/part-" in path.name
-    )
+    try:
+        paths = gold_client.get_paths(path=DASHBOARD_JSON_PATH)
+        json_paths = sorted(
+            path.name
+            for path in paths
+            if not path.is_directory and "/part-" in path.name
+        )
+    except ResourceNotFoundError:
+        logger.info("Dashboard JSON path does not exist yet: %s", DASHBOARD_JSON_PATH)
+        return []
 
     rows: list[dict] = []
     for path in json_paths:
